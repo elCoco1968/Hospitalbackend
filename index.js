@@ -27,7 +27,10 @@ dbConnection();
 
 //para que todas las rutas inicien con /api/usuarios
 //le decimos que todo lo que pase por esa URL sea respondido por el require, la carpeta
-app.use( '/api/usuarios', require('./Routes/usuarios') )
+app.use( '/api/usuarios', require('./Routes/usuarios'));
+
+//Creamos una nueva ruta para el login
+app.use( '/api/login', require('./Routes/auth'));
 
 
 

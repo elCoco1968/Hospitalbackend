@@ -41,7 +41,7 @@ const UsuarioSchema = Schema({
 //tener en cuenta que solo es para efectos visuales
 UsuarioSchema.method('toJSON', function(){
     //le estamos diciendo que obmita el __V y _Id
-    const { __v, _id, ...object} = this.toObject();
+    const { __v, _id, password, ...object} = this.toObject();
     //guardamos el id en una variable
     object.uid = _id;
     return object
