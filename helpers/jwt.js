@@ -7,8 +7,7 @@ const generarJWT = (uid) => {
     return new Promise((resolve, reject) => {
         //tener en cuenta que en el payload grabamos informacion que no sea sensible
         const payload = {
-            uid,
-            nombre: "kevin"
+            uid
             //nombre
         };
 

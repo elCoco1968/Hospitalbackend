@@ -6,18 +6,23 @@ const Usuario = require('../models/usuario')
 const { validationResult } = require('express-validator')
 //encriptar contraseñas
 const bcrypt  = require('bcryptjs')
-const res = require('express/lib/response')
+const res = require('express/lib/response');
+
+//Token JWT
+const { generarJWT } = require('../helpers/jwt')
 
 
 const getUsuarios = async (req, res) => {
 
-    const usuarios =await Usuario.find({}, 'name email password');
 
+
+    const usuarios =await Usuario.find({}, 'name email password');
     //respúesta del backend, normalmente en api rest se responde con un json
     //se devuelve con un objeto json
     res.json({
         ok: true,
-        usuarios
+        usuarios,
+        uid: req.uid
     });
 }
 
@@ -25,8 +30,6 @@ const crearUsuario = async(req, res = response) => {
 
     //extraer la informacion, estos son los requeridos los datos obligatorios
     const { email, password} = req.body;
-
-
 
     try{
 
@@ -49,13 +52,15 @@ const crearUsuario = async(req, res = response) => {
         const salt = bcrypt.genSaltSync()
         usuario.password = bcrypt.hashSync(password, salt)
 
+         //Generar TOKEN!!!
+         const token = await generarJWT(usuario.id);
 
         await usuario.save();
     
-    
         res.json({
             ok: true,
-            usuario
+            usuario,
+            token
         });
 
     } catch (error){
@@ -64,7 +69,6 @@ const crearUsuario = async(req, res = response) => {
             ok: false,
             msg: 'Error inesperado'
         })
-
     }
 
     //con esto  ya le estamos mandando un objeto de tipo usuario y con el
