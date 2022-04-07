@@ -31,6 +31,10 @@ app.use( '/api/usuarios', require('./Routes/usuarios'));
 
 //Creamos una nueva ruta para el login
 app.use( '/api/login', require('./Routes/auth'));
+//ruta hospital
+app.use( '/api/hospitales', require('./Routes/hospitales'));
+//ruta medicos
+app.use( '/api/medicos', require('./Routes/medicos'));
 
 
 

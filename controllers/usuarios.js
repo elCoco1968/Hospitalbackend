@@ -14,6 +14,8 @@ const { generarJWT } = require('../helpers/jwt')
 
 const getUsuarios = async (req, res) => {
 
+    const desde = req.query.desde;
+    console.log(desde)
 
 
     const usuarios =await Usuario.find({}, 'name email password');
@@ -41,12 +43,10 @@ const crearUsuario = async(req, res = response) => {
                 ok: false,
                 mgs: 'El correo ya esta registrado'
             })
-            
         }
 
         const usuario = new Usuario(req.body);
         //para grabar en la base de datos es muy simple
-
         //Encriptar contraseña una sola via es imposible llegar a ese punto,
         //nosotros tampoco vamos poder regresar a la contraseña
         const salt = bcrypt.genSaltSync()
