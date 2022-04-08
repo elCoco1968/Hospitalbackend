@@ -14,17 +14,46 @@ const { generarJWT } = require('../helpers/jwt')
 
 const getUsuarios = async (req, res) => {
 
-    const desde = req.query.desde;
+    //Obtener valor desde la URL
+    //Tener en cuenta que si vamos a mandar la variable es opcional
+    //por lo que utilizamos ?, el ejemplo practico es el siguiente
+    //TODO: http://localhost:3005/api/usuarios?desde=5
+    const desde = (req.query.desde) || 0;
+    const hasta = (req.query.hasta)
     console.log(desde)
 
 
-    const usuarios =await Usuario.find({}, 'name email password');
+
+    //lo devolvemos en un array en el cual las posiciones determinan
+    //donde se van a almacenar los resultados de cada promesa,
+    //lo importante es que ya se van a ejecutar a la vez y no tenemos un await y despues otro
+    const [usuarios, total] = await Promise.all([
+        Usuario
+            .find({}, 'nombre email role google')
+            .skip(desde)
+            .limit( 5 ),
+
+        Usuario.count()
+    ]);
+
+    // const usuarios =await Usuario.find({}, 'name email password')
+    //                                 //Que se sale los valores desde
+    //                                 .skip(desde)
+    //                                 //tambien podemos poner un limite
+    //                                 .limit(5)
+
+
+    // const total = await Usuario.count();
     //respúesta del backend, normalmente en api rest se responde con un json
     //se devuelve con un objeto json
+
+
+
+
     res.json({
         ok: true,
         usuarios,
-        uid: req.uid
+        total
     });
 }
 

@@ -35,6 +35,8 @@ app.use( '/api/login', require('./Routes/auth'));
 app.use( '/api/hospitales', require('./Routes/hospitales'));
 //ruta medicos
 app.use( '/api/medicos', require('./Routes/medicos'));
+//ruta de todo
+app.use( '/api/todo', require('./Routes/busquedas'));
 
 
 
