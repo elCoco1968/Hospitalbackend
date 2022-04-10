@@ -1,7 +1,7 @@
 {
-  "name": "backend-server",
+  "name": "index.js",
   "version": "1.0.0",
-  "description": "",
+  "description": "Recuerden ejecutar ----- npm install -----",
   "main": "index.js",
   "scripts": {
     "start:dev": "nodemon index.js"
@@ -17,5 +17,16 @@
     "express-validator": "^6.14.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elCoco1968/Hospitalbackend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/elCoco1968/Hospitalbackend/issues"
+  },
+  "homepage": "https://github.com/elCoco1968/Hospitalbackend#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }

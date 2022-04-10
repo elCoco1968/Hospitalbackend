@@ -40,7 +40,7 @@ const login = async(req, res = response) => {
         //Generar TOKEN!!!
         const token = await generarJWT(usuarioDB.id);
 
-        res.json({
+        return res.json({
             ok:true,
             token
         })
