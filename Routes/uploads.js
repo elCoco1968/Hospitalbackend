@@ -1,6 +1,6 @@
 /*
 
-    ruta: api/uploads/
+    ruta: api/upload/
 
 */
 
@@ -10,7 +10,7 @@ const expressFileUpload = require('express-fileupload');
 
 const { validarJWT } = require('../middlewares/validarJWT');
 const { check } = require('express-validator');
-const { fileUpload } = require('../controllers/uploads');
+const { fileUpload, retornaImagen } = require('../controllers/uploads');
 
 
 const router = Router();
@@ -20,6 +20,8 @@ router.use(expressFileUpload());
 
 router.put('/:tipo/:id',validarJWT, fileUpload );
 
+//obtener imagen
+router.get('/:tipo/:idFoto', retornaImagen );
 
 
 module.exports = router;

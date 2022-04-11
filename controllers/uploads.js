@@ -1,7 +1,8 @@
 const { response } = require("express");
 const { v4: uuidv4 } = require('uuid');
 const { actualizarImagen } = require("../helpers/actualizar-image");
-
+const path = require('path');
+const fs = require('fs');
 
 const fileUpload = (req, res = response) => {
   const tipo = req.params.tipo;
@@ -40,7 +41,7 @@ const fileUpload = (req, res = response) => {
 
   //validar Extencion
   //validamos las extenciones y si NO esta incluida
-  const extencionesValida = ['png','jpg','jpeg','git'];
+  const extencionesValida = ['png','jpg','jpeg','git','PNG'];
   if( !extencionesValida.includes( extencionArchivo) ){
         return res.status(400).json({
             ok: false,
@@ -81,9 +82,37 @@ const fileUpload = (req, res = response) => {
 
 
 
+
+  
+
+
+
   //con esto en la respuesta podemos ver el nombre del archivo generado por la libreria
 };
 
+const retornaImagen = ( req, res=response) => {
+
+  const tipo = req.params.tipo;
+  const idFoto = req.params.idFoto;
+
+  //Utilizamos una libreria direcamnete de express, llamada path que nos permite
+  //reconstruir una ruta o un path, ponemos dirname y donde se encuentra la imagen
+  const pathImg = path.join(__dirname, `../upload/${tipo}/${idFoto}`);
+
+
+  //poner imagen por defecto
+  if( fs.existsSync( pathImg)){
+    
+      //en ese punto nos devuelve la imagen
+      res.sendFile( pathImg );
+  } else {
+    const pathImg = path.join(__dirname, `../upload/no-img.jpg`);
+    res.sendFile( pathImg );
+  }
+
+}
+
 module.exports = {
   fileUpload,
+  retornaImagen,
 };

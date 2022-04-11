@@ -5,38 +5,74 @@ const Usuario = require("../models/usuario");
 const Medico = require("../models/medico");
 const Hospital = require("../models/hospital");
 
-const actualizarImagen = async(tipo, id,nombreArchivo) => {
+const borrarImagen = (path) => {
 
-  
+  // const pathViejo = `./upload/medicos/${ medico.img }`;
+  // //vamos a verificar si existe un file en ese path y se existe que la elimine
+  if (fs.existsSync(path)) {
+
+    //borrar imagen anterior
+    fs.unlinkSync(path)
+  }
+
+}
+
+
+
+const actualizarImagen = async (tipo, id, nombreArchivo) => {
+
+  let pathViejo = '';
+
   switch (tipo) {
     case "medicos":
-        const medico = await Medico.findById(id);
-        if (!medico) {
-            console.log('No se encontro medico por id');
-            return false;
-        }
+      const medico = await Medico.findById(id);
+      if (!medico) {
+        console.log('No se encontro medico por id');
+        return false;
+      }
+       pathViejo = `./upload/medicos/${medico.img}`;
+      borrarImagen(pathViejo);
 
-        const pathViejo = `./upload/medicos/${ medico.img }`;
-        //vamos a verificar si existe un file en ese path y se existe que la elimine
-        if(fs.existsSync( pathViejo)){
-
-            //borrar imagen anterior
-            fs.unlinkSync(pathViejo)
-        }
-
-
-        //tomar el medico img y ponere e nombre del archivo
-        medico.img = nombreArchivo;
-        //grabamos el medico y que retorne true
-        await medico.save();
-        return true;
-
+      //tomar el medico img y ponere e nombre del archivo
+      medico.img = nombreArchivo;
+      //grabamos el medico y que retorne true
+      await medico.save();
+      return true;
 
       break;
     case "hospitales":
+      const hospital = await Hospital.findById(id);
+      if (!hospital) {
+        console.log('No se encontro hospital por id');
+        return false;
+      }
+       pathViejo = `./upload/hospitales/${hospital.img}`;
+      borrarImagen(pathViejo);
+
+      //tomar el hospital img y ponere e nombre del archivo
+      hospital.img = nombreArchivo;
+      //grabamos el hospital y que retorne true
+      await hospital.save();
+      return true;
       break;
     case "usuarios":
+      const usuarios = await Usuario.findById(id);
+      if (!usuarios) {
+        console.log('No se encontro usuarios por id');
+        return false;
+      }
+      
+      pathViejo = `./upload/usuarios/${usuarios.img}`;
+      borrarImagen(pathViejo);
+      console.log("Hello")
+
+      //tomar el usuarios img y ponere e nombre del archivo
+      usuarios.img = nombreArchivo;
+      //grabamos el usuarios y que retorne true
+      await usuarios.save();
+      return true;
       break;
+
     default:
       break;
   }
@@ -46,3 +82,9 @@ const actualizarImagen = async(tipo, id,nombreArchivo) => {
 module.exports = {
   actualizarImagen
 };
+
+
+
+// var serveIndex = require('serve-index');
+// app.use(express.static(__dirname + '/'))
+// app.use('/uploads', serveIndex(__dirname + '/uploads'));

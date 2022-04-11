@@ -20,7 +20,7 @@ const getUsuarios = async (req, res) => {
     //TODO: http://localhost:3005/api/usuarios?desde=5
     const desde = (req.query.desde) || 0;
     const hasta = (req.query.hasta)
-    console.log(desde)
+    //console.log(desde)
 
 
 
@@ -29,11 +29,11 @@ const getUsuarios = async (req, res) => {
     //lo importante es que ya se van a ejecutar a la vez y no tenemos un await y despues otro
     const [usuarios, total] = await Promise.all([
         Usuario
-            .find({}, 'nombre email role google')
-            .skip(desde)
-            .limit( 5 ),
+            .find({}, 'nombre email role google img')
+            .skip(desde),
+            //.limit( 5 ),
 
-        Usuario.count()
+        Usuario.countDocuments()
     ]);
 
     // const usuarios =await Usuario.find({}, 'name email password')
