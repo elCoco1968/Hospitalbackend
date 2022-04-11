@@ -1,9 +1,11 @@
 const { response } = require("express");
 const { v4: uuidv4 } = require('uuid');
+const { actualizarImagen } = require("../helpers/actualizar-image");
+
 
 const fileUpload = (req, res = response) => {
   const tipo = req.params.tipo;
-  const id = req.params.tipo;
+  const id = req.params.id;
 
   const tiposValidos = ["hospitales", "medicos", "usuarios"];
 
@@ -30,10 +32,11 @@ const fileUpload = (req, res = response) => {
   const file = req.files.imagen
 
   //si en este pundo hacemos un console.log deberiamos poder ver la data de laimagen
-  console.log(file);
+  //console.log(file);
 
   const nombreCortado = file.name.split('.'); //asi obtenemos la extencion, ejemplo wolverone.1.1.jpg
   const extencionArchivo = nombreCortado[ nombreCortado.length -1];
+
 
   //validar Extencion
   //validamos las extenciones y si NO esta incluida
@@ -52,7 +55,7 @@ const fileUpload = (req, res = response) => {
   const nombreArchivo = `${uuidv4()}.${extencionArchivo}`
 
   //path para guardar la imagen
-  const path =`./uploads/${tipo}/${nombreArchivo}`
+  const path =`./upload/${tipo}/${nombreArchivo}`
 
    // Mover la imagen o subirla, el file es donde tenemos nuestra imagen almacenada, el path la ruta a donde la vamos a subir
    file.mv(path, (err) => {
@@ -65,13 +68,17 @@ const fileUpload = (req, res = response) => {
         })
     }
 
+    //actualizar base de dtos
+    actualizarImagen(tipo,id,nombreArchivo)
+
     res.json({
       ok: true,
-      nombreArchivo: nombreArchivo,
+      nombreArchivo,
       msg: 'archivo subido'
     });
-
+    
   });
+
 
 
   //con esto en la respuesta podemos ver el nombre del archivo generado por la libreria

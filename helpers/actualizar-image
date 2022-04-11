@@ -1,0 +1,48 @@
+//con esto puedo leer los fileSystem las carpetas y los archivos y trabajr con ellos
+const fs = require('fs')
+
+const Usuario = require("../models/usuario");
+const Medico = require("../models/medico");
+const Hospital = require("../models/hospital");
+
+const actualizarImagen = async(tipo, id,nombreArchivo) => {
+
+  
+  switch (tipo) {
+    case "medicos":
+        const medico = await Medico.findById(id);
+        if (!medico) {
+            console.log('No se encontro medico por id');
+            return false;
+        }
+
+        const pathViejo = `./upload/medicos/${ medico.img }`;
+        //vamos a verificar si existe un file en ese path y se existe que la elimine
+        if(fs.existsSync( pathViejo)){
+
+            //borrar imagen anterior
+            fs.unlinkSync(pathViejo)
+        }
+
+
+        //tomar el medico img y ponere e nombre del archivo
+        medico.img = nombreArchivo;
+        //grabamos el medico y que retorne true
+        await medico.save();
+        return true;
+
+
+      break;
+    case "hospitales":
+      break;
+    case "usuarios":
+      break;
+    default:
+      break;
+  }
+
+};
+
+module.exports = {
+  actualizarImagen
+};
