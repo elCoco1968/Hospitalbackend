@@ -25,6 +25,10 @@ app.use( express.json());
 dbConnection();
 
 
+//Directorio publico
+app.use(express.static('public'));
+
+
 //para que todas las rutas inicien con /api/usuarios
 //le decimos que todo lo que pase por esa URL sea respondido por el require, la carpeta
 app.use( '/api/usuarios', require('./Routes/usuarios'));
