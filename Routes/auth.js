@@ -4,8 +4,9 @@
 
 const { Router} = require('express');
 const { check } = require('express-validator');
-const { login, loginGoogle } = require('../controllers/auth');
+const { login, loginGoogle, renewToken } = require('../controllers/auth');
 const { validarCampos } = require('../middlewares/validar-campos');
+const { validarJWT } = require('../middlewares/validarJWT');
 
 const router = Router();
 
@@ -25,6 +26,9 @@ router.post('/google',
 loginGoogle)
 
 
+//revalidar el token
+//si el token expiro sacarlo de la cuenta y si no dejarlo Online
+router.get('/renew',validarJWT,renewToken)
 
 
 //Exportando el router
