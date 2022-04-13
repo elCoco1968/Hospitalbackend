@@ -77,14 +77,7 @@ const fileUpload = (req, res = response) => {
       nombreArchivo,
       msg: 'archivo subido'
     });
-    
   });
-
-
-
-
-  
-
 
 
   //con esto en la respuesta podemos ver el nombre del archivo generado por la libreria

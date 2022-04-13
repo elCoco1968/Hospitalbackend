@@ -113,7 +113,6 @@ const eliminarMedico = async(req, res = response) => {
             msg: 'Hable con el admin'
         })
     }
-
 }
 
 

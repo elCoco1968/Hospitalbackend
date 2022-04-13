@@ -29,7 +29,7 @@ const getUsuarios = async (req, res) => {
     //lo importante es que ya se van a ejecutar a la vez y no tenemos un await y despues otro
     const [usuarios, total] = await Promise.all([
         Usuario
-            .find({}, 'nombre email role google img')
+            .find({}, 'name email role google img')
             .skip(desde),
             //.limit( 5 ),
 
