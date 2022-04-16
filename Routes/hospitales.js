@@ -13,7 +13,7 @@ const { validarCampos } = require('../middlewares/validar-campos')
 
 const router = Router();
 
-router.get('/' ,getHospitales);
+router.get('/' ,validarJWT,getHospitales);
 
 router.post('/',
 [

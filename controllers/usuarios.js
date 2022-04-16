@@ -66,7 +66,7 @@ const crearUsuario = async(req, res = response) => {
 
         const existeEmail = await Usuario.findOne({email})
         if(existeEmail && email != undefined){
-            console.log(email)
+            
             return res.status(400).json({
                
                 ok: false,

@@ -6,8 +6,6 @@ const validarJWT = (req ,res, next) => {
     //leer el token
     const token = req.header('x-token');
 
-    console.log(token);
-
     //Con esto estamos validando el token
     //si no hay token nos retirna el 401 y su respectivo error
     //y no continua

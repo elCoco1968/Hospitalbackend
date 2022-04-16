@@ -22,7 +22,7 @@ const crearHospital = async (req, res = response) => {
         usuario: uid,
         ...req.body
     });
-    console.log(uid);
+    
     try {
 
         const hospitalDB = await hospital.save();
