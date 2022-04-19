@@ -19,7 +19,7 @@ router.get('/', validarJWT ,getUsuarios);
 //ruta para crear usuario
 router.post('/',
  [
-   validarJWT,
+   
      //Cuando es un solo Middleware podemos ponerlo normal, pero cuando es mas de uno lo hacemos entre llaves
     check('name', 'el nombre es obligatorio').not().isEmpty(),
     check('password', 'el password es obligatorio').not().isEmpty(),
