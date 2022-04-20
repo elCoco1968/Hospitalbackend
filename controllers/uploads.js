@@ -79,7 +79,6 @@ const fileUpload = (req, res = response) => {
     });
   });
 
-
   //con esto en la respuesta podemos ver el nombre del archivo generado por la libreria
 };
 
@@ -102,7 +101,6 @@ const retornaImagen = ( req, res=response) => {
     const pathImg = path.join(__dirname, `../upload/no-img.jpg`);
     res.sendFile( pathImg );
   }
-
 }
 
 module.exports = {

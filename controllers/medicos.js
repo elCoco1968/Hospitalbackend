@@ -115,8 +115,6 @@ const eliminarMedico = async(req, res = response) => {
     }
 }
 
-
-
 module.exports = {
     getMedicos,
     actualizarMedico,
