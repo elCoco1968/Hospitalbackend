@@ -45,7 +45,6 @@ const actualizarHospital =  async (req, res = response) => {
     const id = req.params.id;
     const uid = req.uid;
 
-
     try {
 
         const hospitalDB = await Hospital.findById(id);
