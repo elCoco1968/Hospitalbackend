@@ -6,6 +6,9 @@ const Usuario = require('../models/usuario');
 const Medico = require('../models/medico');
 const Hospital = require('../models/hospital');
 
+
+
+
 const getTodo = async (req, res = response) => {
 
     //obteniendo el parametro desde la URL
@@ -45,6 +48,8 @@ const getTodo = async (req, res = response) => {
 
     }
 }
+
+
 
 const getDocumentosCol = async (req, res = response) => {
 
