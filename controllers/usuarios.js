@@ -36,7 +36,7 @@ const getUsuarios = async (req, res) => {
         Usuario.countDocuments()
     ]);
 
-    // const usuarios =await Usuario.find({}, 'name email password')
+    // const usuarios = await Usuario.find({}, 'name email password')
     //                                 //Que se sale los valores desde
     //                                 .skip(desde)
     //                                 //tambien podemos poner un limite
